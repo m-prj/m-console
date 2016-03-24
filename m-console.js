@@ -35,6 +35,7 @@
     // can return a function as the exported value.
     var bottom_lock = true;
     var max_row = 20; // limit
+    var ta;
 
     this.scrollBottom = function(boolVal) {
         bottom_lock = boolVal;
@@ -47,7 +48,7 @@
             //console.log('go_bottom');
             //var $obj = $textarea;
             //console.log($obj);
-            var ta = document.querySelector('.div-textaria');
+            //        var ta = document.querySelector('.div-textarea');
             if (ta.length == 0) return;
             ta.scrollTop = ta.scrollHeight;
         }
@@ -56,11 +57,21 @@
     this.setRow = function(rowNum) {
         this.max_row = rowNum;
     }
+    this.appendMsg = function(msg) {
+
+        var txt = document.createElement("div");
+        //txt.innerHTML = i + ":" + String.fromCharCode(65 + i);
+        txt.innerHTML = msg;
+        ta.appendChild(txt);
+        //console.log(ta.children.item(0));
+        ta.removeChild(ta.children.item(0));
+
+    }
     this.init = function() {
         //appDirPath = dirPath;
         //
         // FIFO  Console
-        var ta = document.querySelector('.div-textaria');
+        ta = document.querySelector('.div-textarea');
         var i = max_row;
         while (i > 0) {
             var txt = document.createElement("div");
@@ -74,16 +85,7 @@
         var loopFn = function() {
             setTimeout(function loop() {
 
-                txt = document.createElement("div");
-                txt.innerHTML = i + ":" + String.fromCharCode(65 + i);
-                ta.appendChild(txt);
-                //console.log(ta.children.item(0));
-                ta.removeChild(ta.children.item(0));
-                //if (i > 100 && 500 < i) {
-                //    scrollBottom(false);
-                //} else {
-                //    scrollBottom(true);
-                //}
+                appendMsg(String.fromCharCode(65 + i));
                 scroll_bottom();
                 i++;
 

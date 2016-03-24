@@ -6,4 +6,4 @@ jsで実行ログを表示する際に。
 
 ![デモ画像](images/demo.gif?raw=true "デモ画像")
 
-https://jsfiddle.net/c38fmxm1/5/
+https://jsfiddle.net/c38fmxm1/6/
