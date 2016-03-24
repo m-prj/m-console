@@ -57,21 +57,30 @@
     this.setRow = function(rowNum) {
         this.max_row = rowNum;
     }
+    var selector;
     this.appendMsg = function(msg) {
 
         var txt = document.createElement("div");
         //txt.innerHTML = i + ":" + String.fromCharCode(65 + i);
         txt.innerHTML = msg;
+
+        ta = document.querySelector(selector);
         ta.appendChild(txt);
         //console.log(ta.children.item(0));
         ta.removeChild(ta.children.item(0));
 
     }
-    this.init = function() {
+    this.init = function(selector_txt) {
         //appDirPath = dirPath;
         //
         // FIFO  Console
-        ta = document.querySelector('.div-textarea');
+        var default_selector = '.div_textarea';
+        if(selector_txt != null){
+          selector = default_selector;
+        }else{
+          selector = selector_txt;
+        }
+        ta = document.querySelector(selector);
         var i = max_row;
         while (i > 0) {
             var txt = document.createElement("div");
@@ -81,18 +90,16 @@
             i--;
         }
 
-        var i = 0;
-        var loopFn = function() {
-            setTimeout(function loop() {
-
-                appendMsg(String.fromCharCode(65 + i));
-                scroll_bottom();
-                i++;
-
-                loopFn();
-            }, 30);
-        };
-        loopFn();
+        //var i = 0;
+        //var loopFn = function() {
+        //    setTimeout(function loop() {
+        //        appendMsg(String.fromCharCode(65 + i));
+        //        scroll_bottom();
+        //        i++;
+        //        loopFn();
+        //    }, 30);
+        //};
+        //loopFn();
     }
 
     this.init();
