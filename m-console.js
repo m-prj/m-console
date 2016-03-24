@@ -74,8 +74,8 @@
         //appDirPath = dirPath;
         //
         // FIFO  Console
-        var default_selector = '.div_textarea';
-        if(selector_txt != null){
+        var default_selector = '.div-textarea';
+        if(selector_txt != null || typeof selector_txt === 'undefined'){
           selector = default_selector;
         }else{
           selector = selector_txt;
