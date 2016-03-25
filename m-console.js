@@ -33,7 +33,7 @@
 module.exports = new(function() {
 
     var bottom_lock = true;
-    var max_row = 20; // limit
+    var max_row = 100; // limit
     var ta;
     var selector;
 
@@ -42,7 +42,6 @@ module.exports = new(function() {
     }
     // カーソルを最下行に合わせる
     this.scroll_bottom = function() {
-        console.log(this.bottom_lock);
         if (bottom_lock) {
             //console.log('go_bottom');
             //var $obj = $textarea;
@@ -62,6 +61,7 @@ module.exports = new(function() {
         txt.innerHTML = msg;
 
         ta = document.querySelector(selector);
+        //ta = $(selector)[0];
         ta.appendChild(txt);
         //console.log(ta.children.item(0));
         ta.removeChild(ta.children.item(0));
@@ -85,7 +85,7 @@ module.exports = new(function() {
         //
         // FIFO  Console
         var default_selector = '.div-textarea';
-        if(selector_txt != null || typeof selector_txt === 'undefined'){
+        if(selector_txt == null || typeof selector_txt === 'undefined'){
           selector = default_selector;
         }else{
           selector = selector_txt;
