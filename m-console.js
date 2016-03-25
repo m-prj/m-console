@@ -65,16 +65,14 @@ module.exports = new(function() {
         ta.appendChild(txt);
         //console.log(ta.children.item(0));
         ta.removeChild(ta.children.item(0));
+        this.scroll_bottom();
 
     }
     this.clearMsg = function() {
-
-        var txt = document.createElement("div");
-        txt.innerHTML = "";
         ta = document.querySelector(selector);
         var i = max_row;
-        while (i > 0) {
-            ta.appendChild(txt);
+        while (i >= 0) {
+            ta.appendChild(document.createElement("div"));
             ta.removeChild(ta.children.item(0));
             i--;
         }
