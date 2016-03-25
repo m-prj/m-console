@@ -15,32 +15,31 @@
 // the top function.
 
 // if the module has no dependencies, the above pattern can be simplified to
-(function(root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define([], factory);
-    } else if (typeof module === 'object' && module.exports) {
-        // Node. Does not work with strict CommonJS, but
-        // only CommonJS-like environments that support module.exports,
-        // like Node.
-        module.exports = factory();
-    } else {
-        // Browser globals (root is window)
-        root.returnExports = factory();
-    }
-}(this, function() {
 
-    // Just return a value to define the module export.
-    // This example returns an object, but the module
-    // can return a function as the exported value.
+//(function(root, factory) {
+//    if (typeof define === 'function' && define.amd) {
+//        // AMD. Register as an anonymous module.
+//        define([], factory);
+//    } else if (typeof module === 'object' && module.exports) {
+//        // Node. Does not work with strict CommonJS, but
+//        // only CommonJS-like environments that support module.exports,
+//        // like Node.
+//        module.exports = factory();
+//    } else {
+//        // Browser globals (root is window)
+//        root.returnExports = factory();
+//    }
+//}(this, function() {
+module.exports = new(function() {
+
     var bottom_lock = true;
     var max_row = 20; // limit
     var ta;
+    var selector;
 
     this.scrollBottom = function(boolVal) {
         bottom_lock = boolVal;
-    };
-
+    }
     // カーソルを最下行に合わせる
     this.scroll_bottom = function() {
         console.log(this.bottom_lock);
@@ -53,11 +52,9 @@
             ta.scrollTop = ta.scrollHeight;
         }
     }
-
     this.setRow = function(rowNum) {
         this.max_row = rowNum;
     }
-    var selector;
     this.appendMsg = function(msg) {
 
         var txt = document.createElement("div");
@@ -70,6 +67,19 @@
         ta.removeChild(ta.children.item(0));
 
     }
+    this.clearMsg = function() {
+
+        var txt = document.createElement("div");
+        txt.innerHTML = "";
+        ta = document.querySelector(selector);
+        var i = max_row;
+        while (i > 0) {
+            ta.appendChild(txt);
+            ta.removeChild(ta.children.item(0));
+            i--;
+        }
+    }
+
     this.init = function(selector_txt) {
         //appDirPath = dirPath;
         //
@@ -81,11 +91,10 @@
           selector = selector_txt;
         }
         ta = document.querySelector(selector);
+        var txt = document.createElement("div");
+        txt.innerHTML = "";
         var i = max_row;
         while (i > 0) {
-            var txt = document.createElement("div");
-            //txt.innerHTML = i;
-            txt.innerHTML = "";
             ta.appendChild(txt);
             i--;
         }
@@ -101,8 +110,6 @@
         //};
         //loopFn();
     }
-
-    this.init();
-    //return {};
-    return this;
-}));
+})();
+ //   return this;
+//}));
